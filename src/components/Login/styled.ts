@@ -32,6 +32,6 @@ export const Login = styled.div`
   }
 
   @media (min-width: 1024px) {
-    width: ${px2vw(200)};
+    width: ${px2vw(300)};
   }
 `;

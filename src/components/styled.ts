@@ -28,33 +28,42 @@ export const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin: ${px2vw(32)};
-  max-width: 100%;
 
   @media (min-width: 1024px) {
     flex-wrap: nowrap;
+    margin-top: ${px2vw(10)};
+    margin-left: ${px2vw(200)};
+    margin-right: ${px2vw(200)};
+    margin-bottom: ${px2vw(10)};
   }
 `;
 
-export const Box = styled.div<BoxProps>`
+export const Box = styled.div`
   display: flex;
+  border-radius: 15px;
+  box-shadow:  0 0 10px #D8D8D8;
   width: ${px2vw(320, 320)};
   min-height: ${px2vw(200, 320)};
   flex-direction: column;
-  padding: ${px2vw(20)};
+  padding: ${px2vw(100)};
   margin: ${px2vw(20)};
-  background-color: ${({ bgColor }) => bgColor};
+  background-color: white;
   height: 100%;
 
   @media (min-width: 768px) {
     width: ${px2vw(320, 768)};
     min-height: ${px2vw(200, 768)};
     height: 100%;
+    padding: ${px2vw(10)};
+    margin: ${px2vw(5)};
   }
 
   @media (min-width: 1024px) {
     width: ${px2vw(500)};
     min-height: ${px2vw(300)};
     height: 100%;
+    padding: ${px2vw(30)};
+    margin: ${px2vw(5)};
   }
 `;
 

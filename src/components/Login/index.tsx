@@ -6,14 +6,14 @@ import useLogin from './useLogin';
 
 const LoginPage = () => {
   const [formContext, state] = useLogin();
-  console.log(state)
+  const { loading, data } = state;
   
   return (
     <Container>
       <Login>
         <Content>
           <BoxTitle>Login</BoxTitle>
-          <LoginForm formContext={formContext} />
+          <LoginForm formContext={formContext} userData={data} />
         </Content>
       </Login>
     </Container>

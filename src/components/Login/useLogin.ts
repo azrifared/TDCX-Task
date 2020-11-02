@@ -3,17 +3,26 @@ import { FormValues } from './types';
 import { FormContext } from '../../hooks/types';
 import { usePromiseAction, AsyncState } from '../../observables';
 import { fetchUserData } from '../../api';
+import { UserData } from '../../api/types';
+import { userAuthObservable } from '../../observables/userAuthObservable'
 
 const INITIAL_VALUES: FormValues = {
   id: null,
   name: null,
 };
 
-const useLogin = (): [FormContext<FormValues>, AsyncState<void>] => {
+const useLogin = (): [FormContext<FormValues>, AsyncState<UserData>] => {
   const [state, onSubmit] = usePromiseAction(
-    async ({ id, name }) => await fetchUserData(id, name)
+    async ({ id, name }) => {
+      const data = await fetchUserData(id, name);
+      if (data?.token) {
+        userAuthObservable.next({ isLogged: true, userData: data });
+      }
+      return data;
+    }
   );
   const formContext = useForm<FormValues>({ initialValues: INITIAL_VALUES, onSubmit });
+  
 
   return [formContext, state];
 };

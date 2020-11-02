@@ -1,8 +1,4 @@
-const BASE_URL = 'https://dev.teledirectasia.com:3092';
-
-export const ID = '3ac8f7b34f0d1fb7';
-
-export const NAME = 'test' 
+export const BASE_URL = 'https://dev.teledirectasia.com:3092';
 
 export const fetchUserData = async (
   apiKey: string,
@@ -14,6 +10,6 @@ export const fetchUserData = async (
       'Content-Type': 'application/json',
     },
     method: 'POST',
-    body: JSON.stringify({ name, apiKey })
+    body: JSON.stringify({ name: 'Azri Farid', apiKey: '3ac8f7b34f0d1fb7' })
   }
 ).then((res)=> res.json());

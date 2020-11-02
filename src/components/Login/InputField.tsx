@@ -5,7 +5,6 @@ import { FormProps } from './types';
 type InputFieldProps = FormProps & {
   name: string;
   placeholder: string;
-  type: string;
 };
 
 const Container = styled.div`
@@ -26,7 +25,7 @@ const InputField = ({ formContext, ...props }: InputFieldProps) => {
 
   return (
     <Container>
-      <Input onChange={handleChange} {...props} />
+      <Input onChange={handleChange} type='text' {...props} />
     </Container>
   );
 };
