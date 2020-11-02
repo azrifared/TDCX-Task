@@ -1,7 +1,10 @@
 import React from "react";
+import LoginPage from './components/Login';
+import { Global } from './components/styled';
 
 export default () => (
-  <h1>
-    Waiting for the task!
-  </h1>
+  <>
+    <Global />
+    <LoginPage />
+  </>
 );
