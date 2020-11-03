@@ -1,12 +1,26 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import styled, { css } from 'styled-components';
 import { UserData } from '../../api/types';
 import { BASE_URL } from '../../api/index';
 import { px2vw } from '../utils';
-import { userSubject } from '../../observables/userAuthObservable'
-type DashboardProps = {
-  userData: UserData;
+import { userSubject } from '../../observables/userAuthObservable';
+import { TableContextWrapper } from './context';
+
+const Header = () => {
+  const logoutHandler = useCallback(() => {
+    userSubject.next({ isLogged: false, data: null, clearCached: true, loading: false });
+  }, []);
+  const userData = useContext(TableContextWrapper) as UserData;
+  
+  return (
+    <TopBar>
+      <Image src={`${BASE_URL}${userData?.image}`} />
+      <Text>{userData?.token?.name}</Text>
+      <Logout onClick={logoutHandler}>Logout</Logout>
+    </TopBar>
+  );
 };
+
 
 const styledText = css`
   padding-left: 10px;
@@ -59,19 +73,5 @@ const Logout = styled.div`
   margin-left: auto;
   margin-right: 20px
 `;
-
-const Header = ({ userData }: DashboardProps) => {
-  const logoutHandler = useCallback(() => {
-    userSubject.next({ isLogged: false, data: null, clearCached: true, loading: false });
-  }, []);
-  
-  return (
-    <TopBar>
-      <Image src={`${BASE_URL}${userData?.image}`} />
-      <Text>{userData?.token?.name}</Text>
-      <Logout onClick={logoutHandler}>Logout</Logout>
-    </TopBar>
-  );
-};
 
 export default Header;

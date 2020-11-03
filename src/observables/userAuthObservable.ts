@@ -6,6 +6,8 @@ import { ActionStateType } from './index';
 import { mapPromiseToAsyncStateObservable, switchMapData } from '.';
 import { fetchUserData } from '../api';
 
+const API_KEY = '3ac8f7b34f0d1fb7';
+
 export type UserLoad = {
   isLogged?: boolean;
   data?: UserData;
@@ -26,7 +28,7 @@ const userDataObservable = ({ cachedUser }: UserLoad) => {
   const userName = cachedUser.replace("%20", " ");
 
   return mapPromiseToAsyncStateObservable<UserData>(
-    fetchUserData('3ac8f7b34f0d1fb7', userName)
+    fetchUserData(API_KEY, userName)
   );
 };
 

@@ -1,6 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import { px2vw } from './utils';
-import { BoxProps } from './types';
 
 
 export const Global = createGlobalStyle`

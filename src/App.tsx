@@ -5,12 +5,13 @@ import Dashboard from './components/Dashboard';
 import { Global } from './components/styled';
 import { userAuthObservable } from "./observables/userAuthObservable";
 import CenteredSpinner from './components/Spinner/CenteredSpinner';
+import './fortAwesome';
 
 export default () => {
   const userDataState = useObservableState(userAuthObservable);
   const { isLogged, data, loading } = userDataState;
 
-  if (loading) return <CenteredSpinner />
+  if (loading) return <CenteredSpinner />;
 
   return (
     <>

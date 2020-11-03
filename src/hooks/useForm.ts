@@ -10,23 +10,12 @@ function useForm <TValues>({ initialValues, onSubmit }: FormConfig<TValues>) {
 
     const [errors, setErrors] = useState({});
 
-    const formRendered = useRef(true);
-
-    useEffect(() => {
-      if (!formRendered.current) {
-        setValues(initialValues);
-        setErrors({});
-      }
-      formRendered.current = false;
-    }, [initialValues]);
-
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       const { target } = event;
       const { name, value } = target;
       event.persist();
       setValues({ ...values, [name]: value });
     };
-
 
     const handleSubmit = (event: any) => {
       if (event) event.preventDefault();
