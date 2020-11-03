@@ -1,25 +1,32 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Subject, from } from 'rxjs';
+import * as R from 'ramda';
 import { switchMap, startWith } from 'rxjs/operators';
 import { mapPromiseToAsyncStateObservable, switchMapData } from '../../observables';
 import { fetchAllTasks } from '../../api';
 import { AllTaskType } from '../../api/types';
 
+type TaskAction = { token?: string; searchString?: string; }
+
 export const popupObservable = new BehaviorSubject(false);
 
 export const editPopupObservable = new BehaviorSubject(false);
 
-export const taskActionSubject = new Subject<{ token?: string, searchString?: string }>();
+export const taskActionSubject = new Subject<TaskAction>();
 
 export const searchObservable = new Subject();
 
-const filterSearchObservable = (searchString: string) => switchMapData((data: any) => {
-  console.log(data)
-  return from([data])
+const customFilter = (val: string) => R.filter(R.compose(R.any(R.contains(val)),R.values));
+
+const filterSearchObservable = (searchString: string) => switchMapData((state: any) => {
+  const filteredData = customFilter(searchString)(state?.data?.tasks)
+  const newState = R.set(R.lensPath(['data', 'tasks']), filteredData, state);
+
+  return from([newState]);
 })
 
 const fetchTaskObservable = switchMap(
-  ({ token, searchString }: { token: string, searchString?: string }) => {
+  ({ token }: TaskAction) => {
 
     return mapPromiseToAsyncStateObservable<AllTaskType>(
       fetchAllTasks(token)
@@ -28,9 +35,9 @@ const fetchTaskObservable = switchMap(
 );
 
 const handleObservable = (
-  func: any
+  func: (state: TaskAction) => Observable<any>
 ) => switchMap(
-  (data: any) => {
+  (data: TaskAction) => {
     if (data?.searchString) return func(data)
 
     return mapPromiseToAsyncStateObservable<AllTaskType>(
@@ -39,14 +46,14 @@ const handleObservable = (
   }
 );
 
-const test = handleObservable(
-  (data: any) => from([data]).pipe(
+const combineObservables = handleObservable(
+  (data: TaskAction) => from([data]).pipe(
     fetchTaskObservable,
     filterSearchObservable(data?.searchString)
   )
 );
 
 export const taskObservable = taskActionSubject.pipe(
-  test,
+  combineObservables,
   startWith({ loading: true, actionState: "processing" })
 );
