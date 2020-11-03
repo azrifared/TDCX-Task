@@ -39,9 +39,11 @@
     "font-awesome": "^4.7.0"
   },
   "dependencies": {
+    "@types/js-cookie": "^2.2.6",
     "@types/react-bootstrap": "^0.32.24",
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "4.1.8",
+    "js-cookie": "^2.2.1",
     "observable-hooks": "^2.2.0",
     "react": "^17.0.1",
     "react-bootstrap": "^0.32.4",

@@ -10,6 +10,6 @@ export const fetchUserData = async (
       'Content-Type': 'application/json',
     },
     method: 'POST',
-    body: JSON.stringify({ name: 'Azri Farid', apiKey: '3ac8f7b34f0d1fb7' })
+    body: JSON.stringify({ name, apiKey })
   }
 ).then((res)=> res.json());

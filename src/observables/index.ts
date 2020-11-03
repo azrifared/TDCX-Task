@@ -33,10 +33,6 @@ export const mapPromiseToAsyncState = <TResult>(promise: Promise<TResult>): Prom
   .then((data) => ({ loading: false, data, actionState: ACTION_STATE.COMPLETED as ActionStateType }))
   .catch((error) => ({ loading: false, error, actionState: ACTION_STATE.ERROR as ActionStateType }));
 
-export const mapPromiseToAsyncSaveState = <TResult>(promise: Promise<TResult>): Promise<AsyncSaveState<TResult>> => promise
-  .then((data) => ({ isSaving: false, data }))
-  .catch((saveError) => ({ isSaving: false, saveError }));
-
 export const mapPromiseToAsyncStateObservable = <TResult>(promise: Promise<TResult>): Observable<AsyncState<TResult>> => {
   const mappedPromise = mapPromiseToAsyncState(promise);
   const initialState = { loading: true, actionState: ACTION_STATE.PROCESSING as ActionStateType };
@@ -86,3 +82,19 @@ export const usePromiseAction = <TArgs extends any[], TResult>(
 
   return [actionState, actionHandler];
 };
+
+
+export const switchMapData = (
+  <
+    T,
+    A extends AsyncState<T> = AsyncState<T>,
+  >(fnc: (state: A) => Observable<any>) => (
+    switchMap((state: A) => {
+      if (!state.data) {
+        return from([state]);
+      }
+
+      return fnc(state);
+    })
+  )
+);

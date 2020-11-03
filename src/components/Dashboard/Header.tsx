@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import { UserData } from '../../api/types';
 import { BASE_URL } from '../../api/index';
 import { px2vw } from '../utils';
-import { userAuthObservable } from '../../observables/userAuthObservable'
+import { userSubject } from '../../observables/userAuthObservable'
 type DashboardProps = {
   userData: UserData;
 };
@@ -45,8 +45,8 @@ const Image = styled.img`
   margin-left: 20px
 
   @media (min-width: 1024px) {
-    width: ${px2vw(25, 700)};
-    height: ${px2vw(25, 700)};
+    width: ${px2vw(20, 700)};
+    height: ${px2vw(20, 700)};
   }
 `;
 
@@ -62,12 +62,12 @@ const Logout = styled.div`
 
 const Header = ({ userData }: DashboardProps) => {
   const logoutHandler = useCallback(() => {
-    userAuthObservable.next({ isLogged: false, userData: null });
+    userSubject.next({ isLogged: false, data: null, clearCached: true, loading: false });
   }, []);
   
   return (
     <TopBar>
-      <Image src={`https://dev.teledirectasia.com:3092/images/profile.jpg`} />
+      <Image src={`${BASE_URL}${userData?.image}`} />
       <Text>{userData?.token?.name}</Text>
       <Logout onClick={logoutHandler}>Logout</Logout>
     </TopBar>

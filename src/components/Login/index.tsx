@@ -3,6 +3,7 @@ import { Login, Content } from './styled';
 import { Container, BoxTitle } from "../styled";
 import LoginForm from './LoginForm'
 import useLogin from './useLogin';
+import Spinner from '../Spinner';
 
 const LoginPage = () => {
   const [formContext, state] = useLogin();
@@ -12,8 +13,15 @@ const LoginPage = () => {
     <Container>
       <Login>
         <Content>
-          <BoxTitle>Login</BoxTitle>
-          <LoginForm formContext={formContext} userData={data} />
+          {loading
+            ? <Spinner />
+            : (
+              <>
+                <BoxTitle>Login</BoxTitle>
+                <LoginForm formContext={formContext} userData={data} />
+              </>
+            )
+          }
         </Content>
       </Login>
     </Container>
