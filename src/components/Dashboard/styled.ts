@@ -71,7 +71,7 @@ export const TableDataContainer = styled.div`
   margin: 5px;
   font-size: 3rem;
   font-family: Segoe UI;
-  max-width: 100px;
+  max-width: 200px;
   overflow: hidden;
   white-space: nowrap;
   @media (min-width: 1024px) {
