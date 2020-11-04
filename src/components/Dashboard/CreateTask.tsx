@@ -53,7 +53,7 @@ const Container = styled.div`
   min-height: 150px;
   left: 49%;
   top: 30%;
-  position: absolute;
+  position: fixed;
   border-radius: 15px;
   -webkit-transform: translate3d(-50%, -50%, 0);
   -moz-transform: translate3d(-50%, -50%, 0);
