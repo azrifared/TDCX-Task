@@ -6,7 +6,7 @@ import { usePromiseAction, AsyncState } from '../../observables';
 import { FormContext } from '../../hooks/types';
 import { postEditTask } from '../../api';
 import { UserData } from '../../api/types';
-import { taskActionSubject } from './observables';
+import { taskActionSubject, dashboardActionSubject } from './observables';
 
 type FormValues = {
   name: string;
@@ -23,7 +23,7 @@ const useEdit = (task: TaskType): [FormContext<FormValues>, AsyncState<any>] => 
       const newData = { ...task, name }
       const res = await postEditTask(token, newData);
       taskActionSubject.next({ token });
-      
+      dashboardActionSubject.next(token);
       return res;
     }
   );

@@ -10,7 +10,7 @@ type TextListProps = {
 const List = ({ data }: { data: DashboardDataType }) => (
   <Container>
     {data?.latestTasks?.map(({ _id, name, completed }) => (
-      <TextContainer>
+      <TextContainer key={_id}>
         <TextList
           completed={completed}
           key={_id}
