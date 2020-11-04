@@ -8,12 +8,12 @@ http://azrifared.github.io/TDCX-Task
 you can open it from mobile or desktop as it is using responsive layout
 
 Please use below credential to access the dashboard:
-ID: 3ac8f7b34f0d1fb7
-Name: You can use any name that you prefer
+- ID: 3ac8f7b34f0d1fb7
+- Name: You can use any name that you prefer
 
 # Architecture
-Handling state: I'm using RXJS observable, react hooks and observable-hooks for state management.
-View: styled-components were used to beutify the apps.
+- State management: I'm using RXJS observable, react hooks and observable-hooks for state management.
+- View: styled-components were used to beutify the apps.
 
 I'm using typescript to speed up my development and help me to trace error at code level.
 
@@ -36,5 +36,5 @@ npm run deploy
 - deploy this project to github page. 
 
 # Read more
-Rxjs Observable - https://rxjs-dev.firebaseapp.com/guide/observable
-Observable hooks - https://observable-hooks.js.org/guide/
+- Rxjs Observable - https://rxjs-dev.firebaseapp.com/guide/observable
+- Observable hooks - https://observable-hooks.js.org/guide/
