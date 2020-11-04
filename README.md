@@ -14,6 +14,7 @@ Please use below credential to access the dashboard:
 ## Architecture
 - State management: I'm using RXJS observable, react hooks and observable-hooks for state management.
 - View: styled-components were used to beutify the apps.
+- Build project: Webpack
 
 I'm using typescript to speed up my development and help me to trace error at code level.
 
