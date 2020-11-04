@@ -3,7 +3,7 @@ import { TaskType } from '../../api/types';
 import { TableContextWrapper } from './context';
 import { UserData } from '../../api/types';
 import { postEditTask } from '../../api';
-import { taskActionSubject } from './observables';
+import { taskActionSubject, dashboardActionSubject } from './observables';
 
 type TableRowFieldProps = {
   task: TaskType
@@ -20,7 +20,7 @@ const CheckboxField = ({ task }: TableRowFieldProps) => {
       setChecked(value)
       await postEditTask(token, newData);
       taskActionSubject.next({ token });
-
+      dashboardActionSubject.next(token);
     }, []
   );
 

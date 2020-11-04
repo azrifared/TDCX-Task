@@ -12,17 +12,6 @@ import TableRowField from './TableRowField';
 import { AsyncState } from '../../observables';
 import { AllTaskType } from '../../api/types';
 
-const Message = styled.div`
-  text-align: center;
-  font-size: 2em;
-  font-family: Segoe UI;
-
-  @media (min-width: 1024px) {
-    font-size: 1rem;
-  }
-`;
-
-
 const Tables = () => {
   const userData = useContext(TableContextWrapper) as UserData;
   const token = userData.token.token;
@@ -56,5 +45,16 @@ const Tables = () => {
     </Box>
   );
 };
+
+const Message = styled.div`
+  text-align: center;
+  font-size: 2em;
+  font-family: Segoe UI;
+
+  @media (min-width: 1024px) {
+    font-size: 1rem;
+  }
+`;
+
 
 export default Tables;

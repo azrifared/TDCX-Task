@@ -8,7 +8,7 @@ import { postNewTask } from '../../api';
 import { TableContextWrapper } from './context';
 import { UserData } from '../../api/types';
 import { popupObservable } from './observables';
-import { taskActionSubject } from './observables';
+import { taskActionSubject, dashboardActionSubject } from './observables';
 
 const INITIAL_VALUES = {
   name: '',
@@ -23,6 +23,7 @@ const useTask = (): [FormContext<FormValues>, AsyncState<any>] => {
       const res = await postNewTask(token, name)
       popupObservable.next(!isPopup);
       taskActionSubject.next({ token });
+      dashboardActionSubject.next(token);
       return res
     }
   );

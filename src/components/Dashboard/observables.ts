@@ -5,6 +5,7 @@ import { switchMap, startWith } from 'rxjs/operators';
 import { mapPromiseToAsyncStateObservable, switchMapData } from '../../observables';
 import { fetchAllTasks } from '../../api';
 import { AllTaskType } from '../../api/types';
+import { fetchDashboardData } from '../../api';
 
 type TaskAction = { token?: string; searchString?: string; }
 
@@ -16,6 +17,8 @@ export const taskActionSubject = new Subject<TaskAction>();
 
 export const searchObservable = new Subject();
 
+export const dashboardActionSubject = new Subject();
+
 const customFilter = (val: string) => R.filter(R.compose(R.any(R.contains(val)),R.values));
 
 const filterSearchObservable = (searchString: string) => switchMapData((state: any) => {
@@ -26,12 +29,9 @@ const filterSearchObservable = (searchString: string) => switchMapData((state: a
 })
 
 const fetchTaskObservable = switchMap(
-  ({ token }: TaskAction) => {
-
-    return mapPromiseToAsyncStateObservable<AllTaskType>(
-      fetchAllTasks(token)
-    )
-  }
+  ({ token }: TaskAction) => mapPromiseToAsyncStateObservable<AllTaskType>(
+    fetchAllTasks(token)
+  )
 );
 
 const handleObservable = (
@@ -55,5 +55,17 @@ const combineObservables = handleObservable(
 
 export const taskObservable = taskActionSubject.pipe(
   combineObservables,
+  startWith({ loading: true, actionState: "processing" })
+);
+
+
+const fetchDashboardObservable = switchMap(
+  (token: string) => mapPromiseToAsyncStateObservable<any>(
+    fetchDashboardData(token)
+  )
+);
+
+export const dashboardObservable = dashboardActionSubject.pipe(
+  fetchDashboardObservable,
   startWith({ loading: true, actionState: "processing" })
 );

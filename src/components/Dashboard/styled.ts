@@ -83,3 +83,13 @@ export const TableDataContainer = styled.div`
 export const ActionContainer = styled.div`
   margin-left: auto;
 `;
+
+export const Message = styled.div`
+  text-align: center;
+  font-size: 2em;
+  font-family: Segoe UI;
+  padding: 20px;
+  @media (min-width: 1024px) {
+    font-size: 1rem;
+  }
+`;

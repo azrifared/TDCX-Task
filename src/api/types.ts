@@ -19,3 +19,10 @@ export type AllTaskType = {
   msg: string;
   tasks: TaskType[];
 };
+
+export type DashboardDataType = {
+  latestTasks: TaskType[];
+  msg: string;
+  tasksCompleted: number;
+  totalTasks: number;
+};
