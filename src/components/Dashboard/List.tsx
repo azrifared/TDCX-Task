@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { DashboardDataType } from '../../api/types';
-import { px2vw } from '../utils';
 
 type TextListProps = {
   completed: boolean;
@@ -23,12 +22,7 @@ const List = ({ data }: { data: DashboardDataType }) => (
 );
 
 const Container = styled.div`
-  margin: ${px2vw(50)};
   align-items: center;
-
-  @media (min-width: 1024px) {
-    margin: ${px2vw(20)};
-  }
 `;
 
 const TextContainer = styled.div`

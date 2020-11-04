@@ -1,37 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { px2vw } from '../utils';
+import { px2vw, getChartData } from '../utils';
 import { Box, BoxTitle } from "../styled";
 import { useDashboardContext } from './context';
 import Spinner from '../Spinner';
 import { Message } from './styled';
 import Chart from '../DonutChart';
 import { ChartTotal } from '../DonutChart/styled';
-
-const DonutChartLarge = styled(Chart)`
-  margin: 10px;
-  height: 150px;
-  width: 150px;
-  ${ChartTotal} {
-    fill: grey;
-  }
-`;
-
-const getChartData = (tasksCompleted: number, totalTasks: number) => {
-  const remainingTask = totalTasks - tasksCompleted;
-  return [
-    {
-      count: tasksCompleted,
-      color: 'green',
-      showText: false,
-    },
-    {
-      count: remainingTask,
-      color: null,
-      showText: false,
-    },
-  ]
-}
 
 const Graph = () => {
   const value = useDashboardContext();
@@ -46,8 +21,9 @@ const Graph = () => {
       <Container>
         <DonutChartLarge
           data={chartData}
-          showTotal
+          showTotal={false}
         />
+        
       </Container>
     );
   }
@@ -58,6 +34,15 @@ const Graph = () => {
     </Box>
   );
 };
+
+const DonutChartLarge = styled(Chart)`
+  margin: 10px;
+  height: 130px;
+  width: 130px;
+  ${ChartTotal} {
+    fill: grey;
+  }
+`;
 
 const Container = styled.div`
   margin: ${px2vw(20)};
